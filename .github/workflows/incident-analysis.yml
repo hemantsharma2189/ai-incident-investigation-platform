@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test-analyze-and-build:
-    name: Test, Analyze and Build Container
+    name: Test, Analyze and Build Platform
     runs-on: ubuntu-latest
 
     steps:
@@ -48,6 +48,28 @@ jobs:
         run: |
           docker build -t incident-investigator:test .
 
-      - name: Test Docker container
+      - name: Test incident analyzer container
         run: |
           docker run --rm incident-investigator:test
+
+      - name: Validate Docker Compose configuration
+        run: |
+          docker compose config
+
+      - name: Start metrics exporter container
+        run: |
+          docker run --rm -d \
+            --name metrics-exporter-test \
+            -p 8000:8000 \
+            --entrypoint python \
+            incident-investigator:test \
+            metrics_exporter.py \
+            --data examples/deployment-failure.json \
+            --port 8000
+
+      - name: Verify health and Prometheus metrics
+        run: |
+          sleep 5
+          curl --fail http://localhost:8000/health
+          curl --fail http://localhost:8000/metrics
+          docker stop metrics-exporter-test
