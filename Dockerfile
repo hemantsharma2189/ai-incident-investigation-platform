@@ -13,6 +13,7 @@ RUN groupadd --system incident \
 
 COPY incident_analyzer.py .
 COPY ai_incident_assistant.py .
+COPY metrics_exporter.py .
 COPY examples/ ./examples/
 
 RUN chown -R incident:incident /app
