@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  investigate:
-    name: Test and Analyze Incident
+  test-analyze-and-build:
+    name: Test, Analyze and Build Container
     runs-on: ubuntu-latest
 
     steps:
@@ -43,3 +43,11 @@ jobs:
         with:
           name: incident-investigation-report
           path: incident-report.md
+
+      - name: Build Docker image
+        run: |
+          docker build -t incident-investigator:test .
+
+      - name: Test Docker container
+        run: |
+          docker run --rm incident-investigator:test
