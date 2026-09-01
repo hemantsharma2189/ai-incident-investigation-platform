@@ -1,0 +1,47 @@
+groups:
+  - name: incident-platform-alerts
+    rules:
+      - alert: HighHttpErrorRate
+        expr: incident_http_error_rate_percent > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: High HTTP error rate detected
+          description: HTTP error rate has exceeded 5 percent.
+
+      - alert: HighApplicationLatency
+        expr: incident_average_latency_ms > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: High application latency detected
+          description: Average application latency has exceeded 1000 ms.
+
+      - alert: HighCpuUtilization
+        expr: incident_cpu_percent > 85
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: High CPU utilization detected
+          description: CPU utilization has exceeded 85 percent.
+
+      - alert: HighMemoryUtilization
+        expr: incident_memory_percent > 85
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: High memory utilization detected
+          description: Memory utilization has exceeded 85 percent.
+
+      - alert: RepeatedContainerRestarts
+        expr: incident_container_restarts_total > 3
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: Repeated container restarts detected
+          description: A container has restarted more than three times.
