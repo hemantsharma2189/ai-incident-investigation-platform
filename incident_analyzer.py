@@ -1,5 +1,6 @@
 import argparse
 import json
+from telemetry import record_incident_trace
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -226,6 +227,7 @@ def main():
         data = json.load(file)
 
     findings = analyze_incident(data)
+    record_incident_trace(data, findings)
     report = create_report(data, findings)
 
     Path(args.output).write_text(report, encoding="utf-8")
