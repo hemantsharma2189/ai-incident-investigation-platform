@@ -169,7 +169,16 @@ incident_cpu_percent
 incident_memory_percent
 incident_container_restarts_total
 ```
+## 🚨 Prometheus Alerts
 
+The platform includes alert rules for:
+
+- HTTP error rate above 5%
+- Application latency above 1000 ms
+- CPU utilization above 85%
+- Memory utilization above 85%
+- More than three container restarts
+- 
 ## 🔭 OpenTelemetry Tracing
 
 Without an OTLP endpoint, traces are printed to the console.
@@ -254,7 +263,7 @@ All recovery actions require human approval followed by health validation.
 ## 🚀 Future Enhancements
 
 - Grafana dashboard provisioning
-- Prometheus alert rules
+
 - Kubernetes deployment manifests
 - Slack or email incident notifications
 - OpenTelemetry Collector integration
