@@ -1,0 +1,61 @@
+{
+  "incident": {
+    "id": "INC-2026-001",
+    "service": "checkout-api",
+    "detected_at": "2026-08-31T20:30:00Z"
+  },
+  "metrics": {
+    "http_error_rate_percent": 18.5,
+    "average_latency_ms": 1450,
+    "cpu_percent": 91,
+    "memory_percent": 78
+  },
+  "containers": [
+    {
+      "name": "checkout-api",
+      "status": "running",
+      "restart_count": 6,
+      "last_exit_code": 137
+    },
+    {
+      "name": "payment-worker",
+      "status": "running",
+      "restart_count": 1,
+      "last_exit_code": 0
+    }
+  ],
+  "deployments": [
+    {
+      "version": "v2.4.0",
+      "deployed_at": "2026-08-31T20:10:00Z",
+      "status": "completed",
+      "commit": "a91f2c7"
+    },
+    {
+      "version": "v2.3.5",
+      "deployed_at": "2026-08-25T16:00:00Z",
+      "status": "stable",
+      "commit": "7b41d92"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-08-31T20:24:15Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "Database connection pool exhausted"
+    },
+    {
+      "timestamp": "2026-08-31T20:25:02Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "POST /checkout returned HTTP 500"
+    },
+    {
+      "timestamp": "2026-08-31T20:26:40Z",
+      "level": "CRITICAL",
+      "service": "checkout-api",
+      "message": "Container terminated after memory allocation failure"
+    }
+  ]
+}
